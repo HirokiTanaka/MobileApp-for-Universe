@@ -1,22 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Capture Photo</title>
+<head>
+<title>My Page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+    href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
+<script type="text/javascript"
+    src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+<script type="text/javascript"
+    src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+<script type="text/javascript" src="phonegap.js"></script>
+<script type="text/javascript" charset="utf-8" src="cordova-2.1.0.js"></script>
+<script type="text/javascript">
+/* GPS Function */
+function onSuccess(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    var alt = position.coords.altitude;
+    var hdng = position.coords.heading;
+    var t = new Date(position.timestamp);
+    var msg = lat + "/" + lng + "<" + alt + ">";
+    msg += "<br><" + hdng + ">" + t;
+    var dispText = "Current time is<br><h2>" + t
+				+ "</h2>\nYour location is<br><h2>Latitude: " + lat
+	    	+ "<br>Longitude: " + lng 
+				+ "<br>Altitude: " + alt + "</h2>"
+    document.getElementById("msg").innerHTML=dispText;
+};
+ 
+function onError(error) {
+    alert('code: ' + error.code + ':' + error.message);
+}
+ 
+function doGPSAction(){
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy: true });
+}
 
-    <script type="text/javascript" charset="utf-8" src="cordova-2.1.0.js"></script>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet"
-	    href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
-	<script type="text/javascript"
-	    src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-	<script type="text/javascript"
-    	src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
-	<script type="text/javascript" src="phonegap.js"></script>
-    <script type="text/javascript" charset="utf-8">
-    
-
-    var pictureSource;   // picture source
+/* Camera Function */
+/*
+var pictureSource;   // picture source
     var destinationType; // sets the format of returned value 
 
     // Wait for Cordova to connect with the device
@@ -73,8 +96,6 @@
     // A button will call this function
     //
     function capturePhoto() {
-    
-    console.log("String")
       // Take picture using device camera and retrieve image as base64-encoded string
       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
         destinationType: navigator.camera.DestinationType.DATA_URL });
@@ -102,15 +123,30 @@
     function onFail(message) {
       alert('Failed because: ' + message);
     }
+*/
 
-    </script>
-  </head>
-  <body>
-    <button onclick="capturePhoto();">Capture Photo</button> <br>
+</script>
+     
+</head>
+<body>
+    <!-- GPS Ver. -->
+    <div id="home" data-role="page">
+        <div data-role="header">
+            <h1>My Application</h1>
+        </div>
+        <div data-role="content">
+            <button onclick="doGPSAction();">Get location</button>
+            <p id="msg"></p>
+        </div>
+    </div>
+    
+    <!-- Camera Ver. -->
+<!--    <button onclick="capturePhoto();">Capture Photo</button> <br>
     <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
     <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
     <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
     <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
     <img style="display:none;" id="largeImage" src="" />
-  </body>
+-->
+</body>
 </html>

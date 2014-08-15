@@ -13,7 +13,7 @@
 <script type="text/javascript" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8" src="cordova-2.1.0.js"></script>
 <script type="text/javascript">
-/* GPS Function
+/* GPS Function */
 function onSuccess(position) {
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
@@ -35,8 +35,10 @@ function onError(error) {
  
 function doGPSAction(){
     navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy: true });
-}	*/
+}
 
+/* Camera Function */
+/*
 var pictureSource;   // picture source
     var destinationType; // sets the format of returned value 
 
@@ -121,13 +123,13 @@ var pictureSource;   // picture source
     function onFail(message) {
       alert('Failed because: ' + message);
     }
-
+*/
 
 </script>
      
 </head>
 <body>
-    <!-- GPS Ver.
+    <!-- GPS Ver. -->
     <div id="home" data-role="page">
         <div data-role="header">
             <h1>My Application</h1>
@@ -136,14 +138,15 @@ var pictureSource;   // picture source
             <button onclick="doGPSAction();">Get location</button>
             <p id="msg"></p>
         </div>
-    </div> -->
+    </div>
     
     <!-- Camera Ver. -->
-    <button onclick="capturePhoto();">Capture Photo</button> <br>
+<!--    <button onclick="capturePhoto();">Capture Photo</button> <br>
     <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
     <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
     <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
     <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
     <img style="display:none;" id="largeImage" src="" />
+-->
 </body>
 </html>
